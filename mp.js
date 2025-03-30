@@ -151,3 +151,22 @@ const questions = [
     showQuestion(0);
   };
   
+
+  // id restart a get it and add event listener to restart the questions first delete everything in the promptbox and results div
+    const restartButton = document.getElementById("restart");
+    restartButton.addEventListener("click", () => {
+      const promptBox = document.getElementById("promptbox");
+      const resultsDiv = document.getElementById("results");
+      promptBox.innerHTML = "";
+      resultsDiv.innerHTML = "";
+  
+      // Reset styles
+      document.getElementById("container").style.cssText = "";
+      document.getElementById("map").style.cssText = "visibility: hidden; display: none;";
+      document.getElementById("LapieDescription").style.cssText = "display: none; visibility: hidden;";
+  
+      // Reinitialize the questions
+      createPrompts();
+      showQuestion(0);
+    });
+

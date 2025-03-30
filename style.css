@@ -149,3 +149,12 @@ body {
     box-shadow: rgba(10, 10, 10, 0.75) .6rem .6rem;
   }
 
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  a:hover {
+    color: #9e9b96;
+    cursor: pointer;
+  }
