@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link type="text/css" rel="stylesheet" href="style.css" />
+  <script src="https://d3js.org/d3.v3.js"></script>
+  <script src="https://d3js.org/d3-queue.v3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <div class="header">
+    <p id="title">Making Maps</p>
+  </div>
+
+  <div id="menubar">
+    <a id="About">About the Project</a>
+    <a id="MappingTool">Mapping Tool</a>
+    <a id="Feedback">Submit Feedback</a>
+  </div>
+
+  <div id="container">
+    <div class="prompts" id="promptbox"></div>
+
+    <div id="map" style="display:none; visibility:hidden;">
+      <img class="mapimage" id="lapie" src="Lapie1830.jpeg" />
+    </div>
+  </div>
+
+  <div class="description" id="LapieDescription" style="display:none; visibility:hidden;">
+    <p class="descHeader" id="LapieHeader">Lapie 1830</p>
+    <div class="descContent" id="results">
+      <p></p>
+    </div>
+  </div>
+
+  <script src="mp.js"></script>
+</body>
+
+</html>
