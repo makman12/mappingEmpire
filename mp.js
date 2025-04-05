@@ -30,7 +30,35 @@ const questions = [
       answers: ["Mountains", "Valleys"]
     }
   ];
-  
+
+
+//set map characteristics
+const maps = [
+  {
+    id: "lapie",
+    src: "Lapie1830.jpeg",
+    parameters: {north: 0, borders: 0, monuments: 0, landmarks: 0, river: 0, mountains: 0}
+  },
+  {
+    id: "rogeriana",
+    src: "TabulaRogerianaCropped.jpg",
+    parameters: {north: 1, borders: 1, monuments: 0, landmarks: 0, river: 0, mountains: 0}
+  }
+];
+
+function showClicked(q, answer) {
+  first = `${q.id}A0`;
+  second = `${q.id}A1`;
+    //switch with partner answer if choice is changed
+  if (answer == q["answers"][0]) {
+    document.getElementById(second).style.color = "black";
+    document.getElementById(first).style.color = "#6871a8";
+  } else {
+    document.getElementById(first).style.color = "black"
+    document.getElementById(second).style.color = "#6871a8";
+  }
+}
+
   const responses = {};
   
   function createPrompts() {
@@ -53,16 +81,19 @@ const questions = [
         button.textContent = answer;
   
         button.onclick = function () {
-          showClicked(button.id);
-  
+          showClicked(q, answer);
           responses[q.id] = i;
   
           if (index < questions.length - 1) {
             showQuestion(index + 1);
           } else {
+            //check to make sure there's not already a restart button
+            if (!document.getElementById("restart")){ 
+              showRestart(promptBox);
+            }
             runCompress();
             selectMap();
-            updateMapView();  // new map logic handler
+            //updateMapView();  // new map logic handler
             showResults();
           }
         };
@@ -73,6 +104,31 @@ const questions = [
       promptBox.appendChild(promptDiv);
     });
   }
+
+  //create a restart button below prompts once all questions have been answered
+  function showRestart(div){
+    const p = document.createElement("p");
+    p.textContent = "START OVER";
+    p.id = "restart";
+    div.appendChild(p);
+    restartButton = document.getElementById("restart");
+    restartButton.addEventListener("click", () => {
+      const promptBox = document.getElementById("promptbox");
+      const resultsDiv = document.getElementById("results");
+      promptBox.innerHTML = "";
+      resultsDiv.innerHTML = "";
+  
+      // Reset styles
+      document.getElementById("container").style.cssText = "";
+      document.getElementById("promptbox").style.cssText = "transform: scale(1)";
+      document.getElementById("mapholder").style.cssText = "visibility: hidden; display: none;";
+      document.getElementById("desc").style.cssText = "display: none; visibility: hidden;";
+  
+      // Reinitialize the questions
+      createPrompts();
+      showQuestion(0);
+    });
+  }
   
   function showQuestion(index) {
     const nextQ = document.getElementById(`question${index}`);
@@ -81,25 +137,51 @@ const questions = [
     nextQ.style.animation = "slide-down 1s";
   }
   
-  function showClicked(id) {
-    document.getElementById(id).style.color = "#6871a8";
-  }
+
   
   function runCompress() {
     document.getElementById("container").style.cssText =
-      "justify-content: space-evenly; align-items: center; align-content: space-around;";
+      "justify-content: space-around; align-items: center; align-content: space-between;";
     document.getElementById("promptbox").style.cssText = "transform: scale(.68)";
   }
+
+  function objectsEqual(a, b) {
+    av =Object.values(a);
+    bv = Object.values(b);
+   // if (a === b) return true;
+    if (av == null || bv == null) {
+      return false;
+    } else if (av.length !== bv.length){
+      return false;
+    } 
   
-  function selectMap() {
-    document.getElementById("map").style.cssText =
-      "visibility: visible; display: block; animation: fadeInOpacity 1s ease-in;";
-    document.getElementById("LapieDescription").style.cssText =
-      "display: block; visibility: visible; animation: fadeInOpacity 1s ease-in;";
+    for (var i = 0; i < av.length; ++i) {
+      if (av[i] !== bv[i]) {
+        return false;
+    }}
+    return true;
   }
   
+  
+  function selectMap() {
+   mapchoice = "lapie"; //keeping lapie as temporary default
+   mapheader = "";
+   for (m in maps) {
+    if (objectsEqual(maps[m].parameters, responses)) {
+      mapchoice = maps[m].src;
+      mapheader =  maps[m].id;
+    }
+   }
+   document.getElementById("mapholder").src = mapchoice;
+   document.getElementById("mapholder").style.cssText = "visibility: visible; display: block; animation: fadeInOpacity 1s ease-in;";
+   document.getElementById("desc").style.cssText = "display: block; visibility: visible;";
+   document.getElementById("descHeader").style.cssText = "display: block; visibility: visible; animation: fadeInOpacity 1s ease-in;";
+   document.getElementById("descHeader").textContent = mapheader;
+  };
+  
+
   function updateMapView() {
-    const mapImage = document.getElementById("lapie");
+    const mapImage = document.getElementById("mapholder");
   
     // Reset styles
     mapImage.style.transform = "rotate(0deg)";
@@ -110,14 +192,20 @@ const questions = [
     }
   
     // Call fake functions for now
+    handleNorth(responses.north);
     handleBorders(responses.borders);
     handleMonuments(responses.monuments);
     handleLandmarks(responses.landmarks);
     handleRiver(responses.river);
     handleMountains(responses.mountains);
   }
+
   
   // Stub functions to be filled in
+  function handleNorth(choice) {
+    console.log("North choice:", choice);
+  }
+  
   function handleBorders(choice) {
     console.log("Borders choice:", choice);
   }
@@ -137,7 +225,7 @@ const questions = [
   function handleMountains(choice) {
     console.log("Mountains choice:", choice);
   }
-  
+
   function showResults() {
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = questions.map(q => `
@@ -151,22 +239,4 @@ const questions = [
     showQuestion(0);
   };
   
-
-  // id restart a get it and add event listener to restart the questions first delete everything in the promptbox and results div
-    const restartButton = document.getElementById("restart");
-    restartButton.addEventListener("click", () => {
-      const promptBox = document.getElementById("promptbox");
-      const resultsDiv = document.getElementById("results");
-      promptBox.innerHTML = "";
-      resultsDiv.innerHTML = "";
-  
-      // Reset styles
-      document.getElementById("container").style.cssText = "";
-      document.getElementById("map").style.cssText = "visibility: hidden; display: none;";
-      document.getElementById("LapieDescription").style.cssText = "display: none; visibility: hidden;";
-  
-      // Reinitialize the questions
-      createPrompts();
-      showQuestion(0);
-    });
 
