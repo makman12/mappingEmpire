@@ -2,33 +2,18 @@ const questions = [
     {
       id: "north",
       question: "Which direction is up?",
-      answers: ["North", "South"]
+      answers: ["North", "South", "East"]
+    },
+    {
+      id: "relative",
+      question: "Should we care more about relative or absolute position?",
+      answers: ["Relative", "Absolute"]
     },
     {
       id: "borders",
       question: "What's more important, borders or routes?",
       answers: ["Borders", "Routes"]
     },
-    {
-      id: "monuments",
-      question: "What's a better sign of control, monuments or administration?",
-      answers: ["Monuments", "Administration"]
-    },
-    {
-      id: "landmarks",
-      question: "Which is more important, landmarks or roads?",
-      answers: ["Landmarks", "Roads"]
-    },
-    {
-      id: "river",
-      question: "Which is more important, rivers or roads?",
-      answers: ["Rivers", "Roads"]
-    },
-    {
-      id: "mountains",
-      question: "Which is more important, mountains or valleys?",
-      answers: ["Mountains", "Valleys"]
-    }
   ];
 
 
@@ -36,27 +21,45 @@ const questions = [
 const maps = [
   {
     id: "lapie",
+    title: "Orbis Romanus ad Illustranda Itineraria",
+    author: "Pierre Lapie",
+    date: "1845",
     src: "Lapie1830.jpeg",
-    parameters: {north: 0, borders: 0, monuments: 0, landmarks: 0, river: 0, mountains: 0}
+    parameters: {north: 0, relative:1, borders: 0}
   },
   {
     id: "rogeriana",
+    title: "Tabula Rogeriana",
+    author: "Muhammad al-Idrisi",
+    date: "1154",
     src: "TabulaRogerianaCropped.jpg",
-    parameters: {north: 1, borders: 1, monuments: 0, landmarks: 0, river: 0, mountains: 0}
+    parameters: {north: 1, relative: 1, borders: 1}
+  },
+  {
+    id: "peutinger",
+    title: "Peutinger Table",
+    author: "author unknown",
+    date: "c. 1200",
+    src: "PeutingerTable.jpg",
+    parameters: {north: 0, relative: 0, borders: 1}
+  },
+  {
+    id: "ebstorf",
+    title: "Ebstorf Map",
+    author: "Gervase of Ebstorf",
+    date: "1234-1240",
+    src: "EbstorfDetail.jpg",
+    parameters: {north: 2, relative: 0, borders: 1}
   }
+
 ];
 
 function showClicked(q, answer) {
-  first = `${q.id}A0`;
-  second = `${q.id}A1`;
-    //switch with partner answer if choice is changed
-  if (answer == q["answers"][0]) {
-    document.getElementById(second).style.color = "black";
-    document.getElementById(first).style.color = "#6871a8";
-  } else {
-    document.getElementById(first).style.color = "black"
-    document.getElementById(second).style.color = "#6871a8";
+  prompts = q.answers;
+  for (p in prompts){
+   document.getElementById(prompts[p]).style.color = "black";
   }
+  document.getElementById(answer).style.color = "#6871a8";
 }
 
   const responses = {};
@@ -73,11 +76,10 @@ function showClicked(q, answer) {
       const p = document.createElement("p");
       p.textContent = q.question;
       promptDiv.appendChild(p);
-  
       q.answers.forEach((answer, i) => {
         const button = document.createElement("button");
-        button.className = "promptbutton";
-        button.id = `${q.id}A${i}`;
+        button.className = "promptbutton "+q.id;
+        button.id = answer;
         button.textContent = answer;
   
         button.onclick = function () {
@@ -169,7 +171,7 @@ function showClicked(q, answer) {
    for (m in maps) {
     if (objectsEqual(maps[m].parameters, responses)) {
       mapchoice = maps[m].src;
-      mapheader =  maps[m].id;
+      mapheader =  maps[m].title+", "+maps[m].author+", "+maps[m].date;
     }
    }
    document.getElementById("mapholder").src = mapchoice;
@@ -190,40 +192,6 @@ function showClicked(q, answer) {
     if (responses.north === 1) {
       mapImage.style.transform = "rotate(180deg)";
     }
-  
-    // Call fake functions for now
-    handleNorth(responses.north);
-    handleBorders(responses.borders);
-    handleMonuments(responses.monuments);
-    handleLandmarks(responses.landmarks);
-    handleRiver(responses.river);
-    handleMountains(responses.mountains);
-  }
-
-  
-  // Stub functions to be filled in
-  function handleNorth(choice) {
-    console.log("North choice:", choice);
-  }
-  
-  function handleBorders(choice) {
-    console.log("Borders choice:", choice);
-  }
-  
-  function handleMonuments(choice) {
-    console.log("Monuments choice:", choice);
-  }
-  
-  function handleLandmarks(choice) {
-    console.log("Landmarks choice:", choice);
-  }
-  
-  function handleRiver(choice) {
-    console.log("River choice:", choice);
-  }
-  
-  function handleMountains(choice) {
-    console.log("Mountains choice:", choice);
   }
 
   function showResults() {
@@ -232,7 +200,7 @@ function showClicked(q, answer) {
       <p>${q.question} <strong>${q.answers[responses[q.id]]}</strong></p>
     `).join("");
   }
-  
+
   // Run on page load
   window.onload = () => {
     createPrompts();
