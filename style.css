@@ -71,6 +71,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items:flex-start;
+
   }
 
   .prompts {
@@ -85,7 +86,7 @@ body {
   }
 
   .prompt {
-    font-size:xx-large;
+    font-size:x-large;
   }
 
   #question1 {
@@ -108,17 +109,25 @@ body {
     color: #9e9b96;
   }
 
+  #restart {
+    font-size: x-large;
+    font-weight:bold;
+    color: #3c556e;
+  }
+
+  #restart:hover{
+    opacity: .5;
+    cursor: pointer;
+  }
   
-  #map {
+  #mapholder{
+    width:55rem;
+    height: auto;
     display: none;
     visibility: hidden;
-    }
-
-
-  .mapimage{
-    width:60rem;
-    height: auto;
+    padding:2.5rem;
   }
+
 
   .description {
     display:none;
@@ -129,7 +138,7 @@ body {
     margin-top: 1.5rem;
   }
 
-  .descHeader {
+  #descHeader {
     font-size: xx-large;
     font-weight: bold;
     color:rgba(10, 10, 10, 0.75);
