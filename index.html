@@ -3,12 +3,14 @@
 
 <head>
   <meta charset="utf-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link type="text/css" rel="stylesheet" href="style.css" />
-  <script src="https://d3js.org/d3.v3.js"></script>
-  <script src="https://d3js.org/d3-queue.v3.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="mp.js"></script>
+
 </head>
 
 <body>
@@ -18,7 +20,8 @@
   </div>
 
   <div id="menubar">
-    <a id="About">About the Project</a>
+    <a id="Home" href = "index.html">Home</a>
+    <a id="About" href = "about.html">About the Project</a>
     <a id="MappingTool" href="HittiteMaps.html">Hittite Maps</a>
     <a id="Feedback">Submit Feedback</a>
   </div>
@@ -35,7 +38,9 @@
   <div class="description" id="desc" style="display:none; visibility:hidden;">
     <p id="descHeader"></p>
     <div class="descContent" id="results">
-      <p></p>
+      <p id = "text1"></p>
+      <img src = "" id="fullmap"/>
+      <p id = "text2"></p>
     </div>
   </div>
 

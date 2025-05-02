@@ -1,17 +1,51 @@
+/**
+
 @font-face {
     font-family: "Nanum Myeongjo";
-    src: url('NanumMyeongjo-Regular.ttf');
-    src: url('NanumMyeongjo-Regular.ttf') format('truetype');
+    src: url(nanummyeongjo-regular.ttf);
+    src: url(nanummyeongjo-regular.ttf) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Nanum Myeongjo";
-    src: url('NanumMyeongjo-Bold.ttf');
-    src: url('NanumMyeongjo-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+  font-family: "Nanum Myeongjo";
+  src: url(nanummyeongjo-bold.ttf);
+  src: url(nanummyeongjo-bold.ttf) format('truetype');
+  font-weight: bold;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "Nanum Myeongjo";
+  src: url(nanummyeongjo-extrabold.ttf);
+  src: url(nanummyeongjo-extrabold.ttf) format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+**/
+
+
+.vollkorn-normal {
+  font-family: "Vollkorn", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.vollkorn-bold {
+  font-family: "Vollkorn", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.vollkorn-xbold {
+  font-family: "Vollkorn", serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
 }
 
 @keyframes slide-down {
@@ -41,14 +75,15 @@ body {
     overflow-x: scroll;
     margin: 0;
     font-size: medium;
-    font-family: "Nanum Myeongjo";
+    font-family: "Vollkorn", serif;
+    font-weight:400;
   }
 
   
   .header {
     font-size: x-large;
-    font-family: "Nanum Myeongjo";
-    font-weight: bold;
+    font-family: "Vollkorn", serif;
+    font-weight:400; 
     text-shadow:darkgrey .1em .1em;
     margin-left: 1rem;
   }
@@ -58,7 +93,7 @@ body {
     justify-content:space-around;
     font-size: medium;
     text-shadow:none;
-    font-family: "Nanum Myeongjo";
+    font-family: "Vollkorn", serif;
     padding: 1rem;
     background-color:#bdbbb1;
   }
@@ -75,7 +110,8 @@ body {
   }
 
   .prompts {
-    font-family: "Nanum Myeongjo";
+    font-family: "Vollkorn", serif;
+    font-weight: 400;
     animation: 1s slide-down;
   }
 
@@ -86,7 +122,7 @@ body {
   }
 
   .prompt {
-    font-size:x-large;
+    font-size:1.5rem;
   }
 
   #question1 {
@@ -98,7 +134,7 @@ body {
     background:none;
     border:none;
     cursor: pointer;
-    font-family: "Nanum Myeongjo";
+    font-family: "Vollkorn", serif;
     font-size: x-large;
     padding-inline: 1rem;
     animation: 1s slide-down;
@@ -111,7 +147,7 @@ body {
 
   #restart {
     font-size: x-large;
-    font-weight:bold;
+    font-weight: 400;
     color: #3c556e;
   }
 
@@ -129,10 +165,10 @@ body {
   }
 
 
-  .description {
+  #desc {
     display:none;
     visibility: hidden;
-    height:50rem;
+    height:70rem;
     background-color: #bdbbb1;
     border: black solid .1rem;
     margin-top: 1.5rem;
@@ -140,7 +176,7 @@ body {
 
   #descHeader {
     font-size: xx-large;
-    font-weight: bold;
+    font-weight: 500;
     color:rgba(10, 10, 10, 0.75);
     text-align:center;
     margin-top: 1.5rem;
@@ -166,4 +202,15 @@ body {
   a:hover {
     color: #9e9b96;
     cursor: pointer;
+  }
+
+  #fullmap {
+    display:flex;
+    width:auto;
+    height: 20rem;
+    margin:auto;
+  }
+
+  h1 {
+    margin-left:42%
   }
