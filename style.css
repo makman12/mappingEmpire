@@ -168,8 +168,6 @@ body {
   #desc {
     display:none;
     visibility: hidden;
-    height:100rem;
-    width: 100%;
     background-color: #bdbbb1;
     border: black solid .1rem;
     margin-top: 1.5rem;
