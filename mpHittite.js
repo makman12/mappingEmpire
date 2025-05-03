@@ -343,7 +343,7 @@ function selectDescription() {
 
   // Inject into page
   const fullDescription = fragments.join(" ");
-  header.textContent = "Interpretive Summary Based on Your Choices";
+  header.textContent = "Hittite Territoriality: Your Perspective";
   resultsDiv.innerHTML = `<p>${fullDescription}</p>`;
   desc.style.display = "block";
   desc.style.visibility = "visible";
