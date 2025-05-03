@@ -306,7 +306,7 @@ function selectDescription() {
       fragments.push(`
         <div style="float: right; width: 100px; margin-left: 10px; text-align: center;">
           <img src="https://kayipdiller.com/wp-content/uploads/2020/01/pudihepa.jpg" alt="Seal of Queen Puduhepa" style="width: 100px; height: 100px;">
-          <div style="font-size: 10px; color: #555;">Fig. 2: Seals of Queen Puduhepa</div>
+          <div style="font-size: 10px;">Fig. 2: Seals of Queen Puduhepa</div>
         </div>
       `);      
       fragments.push("In your framework, even a single seal is enough to support claims of territorial authority. But is one object truly sufficient to suggest a broader political narrative? A lone seal could indicate fleeting contact, lost or traded goods, or the movement of individuals rather than sustained control. Basing territorial claims on such minimal evidence risks overstating the reach and permanence of imperial power.");
